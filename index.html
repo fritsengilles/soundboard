@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maten Soundboard</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#121212;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+#search{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:15px;
+}
+
+button{
+    background:#1f1f1f;
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:20px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    background:#333;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎵 Maten Soundboard</h1>
+
+<input
+id="search"
+type="text"
+placeholder="Zoek een sound..."
+onkeyup="filterSounds()"
+/>
+
+<div class="grid" id="soundGrid">
+
+<button data-name="Airhorn" onclick="playSound('sounds/airhorn.mp3')">
+📣 Airhorn
+</button>
+
+<button data-name="Bruh" onclick="playSound('sounds/bruh.mp3')">
+😂 Bruh
+</button>
+
+<button data-name="Vine Boom" onclick="playSound('sounds/vineboom.mp3')">
+💥 Vine Boom
+</button>
+
+<button data-name="Applaus" onclick="playSound('sounds/applaus.mp3')">
+👏 Applaus
+</button>
+
+<button data-name="Lachen" onclick="playSound('sounds/lachen.mp3')">
+🤣 Lachen
+</button>
+
+</div>
+
+<script>
+function playSound(file){
+    const audio = new Audio(file);
+    audio.play();
+}
+
+function filterSounds(){
+    const search =
+      document.getElementById("search")
+      .value.toLowerCase();
+
+    const buttons =
+      document.querySelectorAll("#soundGrid button");
+
+    buttons.forEach(btn => {
+        const name =
+          btn.dataset.name.toLowerCase();
+
+        btn.style.display =
+          name.includes(search)
+          ? "block"
+          : "none";
+    });
+}
+</script>
+
+</body>
+</html>
